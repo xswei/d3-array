@@ -267,33 +267,31 @@ d3.permute(object, fields); // returns ["University Farm", "Manchuria", 27]
 
 在 *start* 和 *stop* (包含)之间返回大约 *count* + 1 个等间隔的数组序列，每个值都是 10 的 1, 2 或 5 的次幂。参考  [d3.tickIncrement](#tickIncrement), [d3.tickStep](#tickStep) 和 [*linear*.ticks](https://github.com/d3/d3-scale/blob/master/README.md#linear_ticks).
 
-当且仅当精确时可能包含指定的起始值。
-
-Ticks are inclusive in the sense that they may include the specified *start* and *stop* values if (and only if) they are exact, nicely-rounded values consistent with the inferred [step](#tickStep). More formally, each returned tick *t* satisfies *start* ≤ *t* and *t* ≤ *stop*.
+当且仅当精确时可能包含指定的起始值。更确切的说，每个返回的打点值 *t* 都满足 *start* ≤ *t* 和 *t* ≤ *stop*。
 
 <a name="tickIncrement" href="#tickIncrement">#</a> d3.<b>tickIncrement</b>(<i>start</i>, <i>stop</i>, <i>count</i>) [<源码>](https://github.com/d3/d3-array/blob/master/src/ticks.js#L16 "Source")
 
-Like [d3.tickStep](#tickStep), except requires that *start* is always less than or equal to *step*, and if the tick step for the given *start*, *stop* and *count* would be less than one, returns the negative inverse tick step instead. This method is always guaranteed to return an integer, and is used by [d3.ticks](#ticks) to avoid guarantee that the returned tick values are represented as precisely as possible in IEEE 754 floating point.
+与 [d3.tickStep](#tickStep) 类似，但是要求 *start* 总是小于等于 *step*, 如果给定的 *start*, *stop* 以及 *count* 计算出来的步长小于 1 时则对步长求反。这个方法始终保持返回整数，并且被 [d3.ticks](#ticks) 使用以避免生成不精确的浮点数。 --- (**不太理解**) --- Like [d3.tickStep](#tickStep), except requires that *start* is always less than or equal to *step*, and if the tick step for the given *start*, *stop* and *count* would be less than one, returns the negative inverse tick step instead. This method is always guaranteed to return an integer, and is used by [d3.ticks](#ticks) to avoid guarantee that the returned tick values are represented as precisely as possible in IEEE 754 floating point.
 
 <a name="tickStep" href="#tickStep">#</a> d3.<b>tickStep</b>(<i>start</i>, <i>stop</i>, <i>count</i>) [<源码>](https://github.com/d3/d3-array/blob/master/src/ticks.js#L16 "Source")
 
-Returns the difference between adjacent tick values if the same arguments were passed to [d3.ticks](#ticks): a nicely-rounded value that is a power of ten multiplied by 1, 2 or 5. Note that due to the limited precision of IEEE 754 floating point, the returned value may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
+返回刻度之间的差值，差值将相同的参数传递给 [d3.ticks](#ticks) 时相邻的两个刻度之间的差值: 会计算一个  10 的 1, 2 或 5 的次幂 的舍入值。要注意的是因为 IEEE 754 浮点数的存储原因，返回的值可能不精确。使用 [d3-format](https://github.com/d3/d3-format) 可以将其转换为人类友好的值。
 
 <a name="range" href="#range">#</a> d3.<b>range</b>([<i>start</i>, ]<i>stop</i>[, <i>step</i>]) [<源码>](https://github.com/d3/d3-array/blob/master/src/range.js "Source")
 
-Returns an array containing an arithmetic progression, similar to the Python built-in [range](http://docs.python.org/library/functions.html#range). This method is often used to iterate over a sequence of uniformly-spaced numeric values, such as the indexes of an array or the ticks of a linear scale. (See also [d3.ticks](#ticks) for nicely-rounded values.)
+返回一个等差数列数组，类似于 `Python` 的内置 [range](http://docs.python.org/library/functions.html#range)。这个方法常用来生成间隔一致的数值，比如数组的索引或者线性比例尺的刻度等。(参考 [d3.ticks](#ticks))。
 
-If *step* is omitted, it defaults to 1. If *start* is omitted, it defaults to 0. The *stop* value is exclusive; it is not included in the result. If *step* is positive, the last element is the largest *start* + *i* \* *step* less than *stop*; if *step* is negative, the last element is the smallest *start* + *i* \* *step* greater than *stop*. If the returned array would contain an infinite number of values, an empty range is returned.
+如果没有指定 *step* 则默认为 1。如果没有指定 *start* 则默认为 0。*stop* 值是唯一的，它不会被包含在结果数组中。如果 *step* 为正则最后一个值为 *start* + *i* \* *step* 且小于 *stop*；如果 *step* 为负，则最后一个值最小为 *start* + *i* \* *step* 且大于 *stop*。如果计算结果包含无穷大数值则会返回一个空数组。
 
-The arguments are not required to be integers; however, the results are more predictable if they are. The values in the returned array are defined as *start* + *i* \* *step*, where *i* is an integer from zero to one minus the total number of elements in the returned array. For example:
+这个方法不要求参数必须为整数。但是如果为整数的话结果会更好预测。返回的值可以根据 *start* + *i* \* *step* 推算出来。但是为小数的话可能会因为浮点数存储出现如下情况:
 
 ```js
 d3.range(0, 1, 0.2) // [0, 0.2, 0.4, 0.6000000000000001, 0.8]
 ```
 
-This unexpected behavior is due to IEEE 754 double-precision floating point, which defines 0.2 * 3 = 0.6000000000000001. Use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption with appropriate rounding; see also [linear.tickFormat](https://github.com/d3/d3-scale/blob/master/README.md#linear_tickFormat) in [d3-scale](https://github.com/d3/d3-scale).
+上述情况是因为 IEEE 754 双精度浮点数的存储导致的，可以使用 [d3-format](https://github.com/d3/d3-format) 将其转换为人类友好的格式。参考 [d3-scale](https://github.com/d3/d3-scale) 中的 [linear.tickFormat](https://github.com/d3/d3-scale/blob/master/README.md#linear_tickFormat)。
 
-Likewise, if the returned array should have a specific length, consider using [array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) on an integer range. For example:
+如果期望返回的数组的长度固定时，可以考虑使用 [array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 来实现，比如:
 
 ```js
 d3.range(0, 1, 1 / 49); // BAD: returns 50 elements!
@@ -302,11 +300,11 @@ d3.range(49).map(function(d) { return d / 49; }); // GOOD: returns 49 elements.
 
 <a name="transpose" href="#transpose">#</a> d3.<b>transpose</b>(<i>matrix</i>) [<源码>](https://github.com/d3/d3-array/blob/master/src/transpose.js "Source")
 
-Uses the [zip](#zip) operator as a two-dimensional [matrix transpose](http://en.wikipedia.org/wiki/Transpose).
+使用 [zip](#zip) 操作作为二维 [matrix transpose(矩阵转置)](http://en.wikipedia.org/wiki/Transpose).
 
 <a name="zip" href="#zip">#</a> d3.<b>zip</b>(<i>arrays…</i>) [<源码>](https://github.com/d3/d3-array/blob/master/src/zip.js "Source")
 
-Returns an array of arrays, where the *i*th array contains the *i*th element from each of the argument *arrays*. The returned array is truncated in length to the shortest array in *arrays*. If *arrays* contains only a single array, the returned array contains one-element arrays. With no arguments, the returned array is empty.
+返回一个数组的数组，其中第 *i* 个数组包含来自每个参数数组的第 *i* 个元素。返回的数组的长度被截断为数组中最短的数组。 如果 *arrays* 只包含一个数组，则返回的数组包含一个元素的数组。 没有参数时，返回的数组是空的。
 
 ```js
 d3.zip([1, 2], [3, 4]); // returns [[1, 3], [2, 4]]
