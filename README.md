@@ -314,26 +314,26 @@ d3.zip([1, 2], [3, 4]); // returns [[1, 3], [2, 4]]
 
 [<img src="https://raw.githubusercontent.com/d3/d3-array/master/img/histogram.png" width="480" height="250" alt="Histogram">](http://bl.ocks.org/mbostock/3048450)
 
-Histograms bin many discrete samples into a smaller number of consecutive, non-overlapping intervals. They are often used to visualize the distribution of numerical data.
+直方图经常用来将大量的离散的值统计成相邻的少量的不重叠的区间。直方图经常用来可视化离散的数值的分布情况。
 
 <a name="histogram" href="#histogram">#</a> d3.<b>histogram</b>() [<源码>](https://github.com/d3/d3-array/blob/master/src/histogram.js "Source")
 
-Constructs a new histogram generator with the default settings.
+使用默认的设置构建一个新的直方图生成器。
 
 <a name="_histogram" href="#_histogram">#</a> <i>histogram</i>(<i>data</i>) [<源码>](https://github.com/d3/d3-array/blob/master/src/histogram.js#L14 "Source")
 
-Computes the histogram for the given array of *data* samples. Returns an array of bins, where each bin is an array containing the associated elements from the input *data*. Thus, the `length` of the bin is the number of elements in that bin. Each bin has two additional attributes:
+根据指定的 *data* 样本计算直方图。返回一个 *bins* (分箱)数组, 每个分箱都是一个包含一组来自 *data* 的数据的数组。分箱的 `length` 属性用来表示当前分箱中包含输入数据的个数，每个分箱还包含两个f附加属性:
 
-* `x0` - the lower bound of the bin (inclusive).
-* `x1` - the upper bound of the bin (exclusive, except for the last bin).
+* `x0` - 当前分箱的最小值(包含).
+* `x1` - 当前分箱的最大值(不包含, 除非是最后一个分箱).
 
 <a name="histogram_value" href="#histogram_value">#</a> <i>histogram</i>.<b>value</b>([<i>value</i>]) [<源码>](https://github.com/d3/d3-array/blob/master/src/histogram.js#L58 "Source")
 
-If *value* is specified, sets the value accessor to the specified function or constant and returns this histogram generator. If *value* is not specified, returns the current value accessor, which defaults to the identity function.
+如果指定了 *value* 则表示设置值访问器为指定的函数并返回当前的直方图生成器。如果没有指定 *value* 则返回当前的值访问器，默认为一个恒等函数(返回元素自身)。
 
-When a histogram is [generated](#_histogram), the value accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default value accessor assumes that the input data are orderable (comparable), such as numbers or dates. If your data are not, then you should specify an accessor that returns the corresponding orderable value for a given datum.
+当直方图被 [generated](#_histogram) 时，值访问器会在输入数据的每个元素上一次调用，并传递当前的元素 `d`, 索引 `i` 以及原始输入数据 `data`. 默认情况下直方图假设输入数据是可排序的(可比较的)，比如数值或时间，当输入数据中的元素不可比较时应该制定访问器并返回一个可比较的值。
 
-This is similar to mapping your data to values before invoking the histogram generator, but has the benefit that the input data remains associated with the returned bins, thereby making it easier to access other fields of the data.
+这类似于在对数据进行分组前将原数据映射到一个值，但是能将输入数据与返回的分箱进行关联从而方便的根据数据的其他字段生成直方图。
 
 <a name="histogram_domain" href="#histogram_domain">#</a> <i>histogram</i>.<b>domain</b>([<i>domain</i>]) [<源码>](https://github.com/d3/d3-array/blob/master/src/histogram.js#L62 "Source")
 
