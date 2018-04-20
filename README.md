@@ -248,7 +248,8 @@ d3.pairs([1, 2, 3, 4], (a, b) => b - a); // returns [1, 1, 1];
 
 <a name="permute" href="#permute">#</a> d3.<b>permute</b>(<i>array</i>, <i>indexes</i>) [<源码>](https://github.com/d3/d3-array/blob/master/src/permute.js "Source")
 
-使用指定的 *indexes* 数组返回重新排列后的 *array*. 返回的数组包含原数组对应索引的元素. 比如 permute(["a", "b", "c"], [1, 2, 0]) 返回 ["b", "c", "a"]. *indexes* 的长度可以与 *array* 的长度可以不一致, 并且可以接受重复索引值或忽略某些索引值. 
+使用指定的 *indexes* 数组返回重新排列后的 *array*. 返回的数组包含原数组对应索引的元素. 
+比如 permute(["a", "b", "c"], [1, 2, 0]) 返回 ["b", "c", "a"]. *indexes* 的长度可以与 *array* 的长度可以不一致, 并且可以接受重复索引值或忽略某些索引值. 
 
 这个方法可以将对象中的属性按照一定次序提取到数组中. 按顺序提取值可以用于生成嵌套选择的数据数据. 比如:
 
