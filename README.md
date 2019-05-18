@@ -272,7 +272,7 @@ d3.permute(object, fields); // returns ["University Farm", "Manchuria", 27]
 
 <a name="tickIncrement" href="#tickIncrement">#</a> d3.<b>tickIncrement</b>(<i>start</i>, <i>stop</i>, <i>count</i>) [<源码>](https://github.com/d3/d3-array/blob/master/src/ticks.js#L16 "Source")
 
-与 [d3.tickStep](#tickStep) 类似, 但是要求 *start* 总是小于等于 *step*, 如果给定的 *start*, *stop* 以及 *count* 计算出来的步长小于 1 时则对步长求反. 这个方法始终保持返回整数, 并且被 [d3.ticks](#ticks) 使用以避免生成不精确的浮点数. --- (**不太理解**) --- Like [d3.tickStep](#tickStep), except requires that *start* is always less than or equal to *step*, and if the tick step for the given *start*, *stop* and *count* would be less than one, returns the negative inverse tick step instead. This method is always guaranteed to return an integer, and is used by [d3.ticks](#ticks) to avoid guarantee that the returned tick values are represented as precisely as possible in IEEE 754 floating point.
+与 [d3.tickStep](#tickStep) 类似, 但是要求 *start* 总是小于等于 *step*, 如果给定的 *start*, *stop* 以及 *count* 计算出来的步长小于 1 时则对步长求反. 这个方法始终保持返回整数, 并且被 [d3.ticks](#ticks) 使用以避免生成不精确的浮点数. 与 [d3.tickStep](#tickStep) 类似，除了要求 *start* 始终小于或等于 *step*，如果根据给定的 *start*, *stop* 和 *count* 计算出来的 `tick` 步长小于 `1` 则返回负值. 这个方法永远保证返回一个整数提供给 [d3.ticks](#ticks), 避免浮点数达到精确表示的目的.
 
 <a name="tickStep" href="#tickStep">#</a> d3.<b>tickStep</b>(<i>start</i>, <i>stop</i>, <i>count</i>) [<源码>](https://github.com/d3/d3-array/blob/master/src/ticks.js#L16 "Source")
 
