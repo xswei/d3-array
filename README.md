@@ -282,7 +282,7 @@ d3.permute(object, fields); // returns ["University Farm", "Manchuria", 27]
 
 返回一个等差数列数组, 类似于 `Python` 的内置 [range](http://docs.python.org/library/functions.html#range). 这个方法常用来生成间隔一致的数值, 比如数组的索引或者线性比例尺的刻度等. (参考 [d3.ticks](#ticks)). 
 
-如果没有指定 *step* 则默认为 1. 如果没有指定 *start* 则默认为 0. *stop* 值是唯一的, 它不会被包含在结果数组中. 如果 *step* 为正则最后一个值为 *start* + *i* \* *step* 且小于 *stop*；如果 *step* 为负, 则最后一个值最小为 *start* + *i* \* *step* 且大于 *stop*. 如果计算结果包含无穷大数值则会返回一个空数组. 
+如果没有指定 *step* 则默认为 1. 如果没有指定 *start* 则默认为 0. *stop* 值是唯一的, 它不会被包含在结果数组中. 如果 *step* 为正, 则最后一个值为 *start* + *i* \* *step* 且小于 *stop*；如果 *step* 为负, 则最后一个值最小为 *start* + *i* \* *step* 且大于 *stop*. 如果计算结果包含无穷大数值则会返回一个空数组. 
 
 这个方法不要求参数必须为整数. 但是如果为整数的话结果会更好预测. 返回的值可以根据 *start* + *i* \* *step* 推算出来. 但是为小数的话可能会因为浮点数存储出现如下情况:
 
