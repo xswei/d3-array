@@ -2,7 +2,7 @@
 
 JavaScript 中的数据通常由一个数组来表示, 所以当可视化或分析数据时往往也会操作数组. 常见的数组操作包括切片, 过滤, 遍历等等. JavaScript 本身支持的数组操作可以参考 [这里](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype).
 
-JavaScript 中 **修改数组自身** 的方法:
+JavaScript 中 **数组变异** 的方法:
 
 * [*array*.pop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop) - 移除最后一个元素.
 * [*array*.push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) - 追加一个或多个元素.
